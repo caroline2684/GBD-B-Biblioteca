@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa522c63-666a-46bc-bd0e-36e9846cb2fc">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionBiblioteca"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT libros.titulo_libro, 
+Count(prestamos.id_prestamo) AS Numero_lecturas
+FROM libros 
+INNER JOIN ejemplares ON libros.Id_libro = ejemplares.id_libro
+INNER JOIN prestamos ON ejemplares.id_ejemplar = prestamos.id_ejemplar
+GROUP BY libros.titulo_libro
+ORDER BY Count(prestamos.id_prestamo) DESC;]]>
+	</queryString>
+	<field name="titulo_libro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo_libro"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulo_libro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="libros"/>
+	</field>
+	<field name="numero_lecturas" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="numero_lecturas"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero_lecturas"/>
+	</field>
+	<group name="titulo_libro">
+		<groupExpression><![CDATA[$F{titulo_libro}]]></groupExpression>
+	</group>
+	<group name="numero_lecturas">
+		<groupExpression><![CDATA[$F{numero_lecturas}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="6" width="180" height="50" uuid="753911e0-8e3b-4cd8-bc7e-8bbf18e6920b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Goudy Old Style" size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Biblioteca ROFAN]]></text>
+			</staticText>
+			<image>
+				<reportElement x="70" y="14" width="50" height="33" uuid="ce983385-6b3b-40e7-b7d6-1684d5823321"/>
+				<imageExpression><![CDATA["C:/Users/Caroline/Downloads/biblioteca-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="158" y="2" width="225" height="30" uuid="dac3f75c-b3a6-4310-8747-5149b21505a2"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de libros mas leidos ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="8" width="100" height="30" uuid="80b45668-5aa7-4716-97a6-ac99df76ae59">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb9b82d2-756c-4822-8786-9fcef73857b0"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo del libro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="8" width="140" height="30" uuid="74810aba-3520-4a0b-adc6-575e8be5cffb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cfab5c9a-4a81-4be7-8edc-7ea6ec3cb6fc"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de lecturas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="11" width="230" height="20" uuid="54cbc13b-1593-41f9-8c96-40a40cc0e371">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb9b82d2-756c-4822-8786-9fcef73857b0"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo_libro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="8" width="110" height="20" uuid="175e9f4e-da3a-410a-a523-f1678f2c90d3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cfab5c9a-4a81-4be7-8edc-7ea6ec3cb6fc"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_lecturas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="219" splitType="Stretch">
+			<stackedBar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement key="" stretchType="ElementGroupBottom" mode="Transparent" x="40" y="10" width="500" height="194" forecolor="#030303" uuid="95f48ad7-ae17-4133-8573-f67196b8c322">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{titulo_libro}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{numero_lecturas}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{numero_lecturas}]]></valueExpression>
+						<labelExpression><![CDATA[$F{titulo_libro}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="109" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
